@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ username }}'s History</title>
+</head>
+
+<body>
+    <h1>{{ username }}'s Prediction History</h1>
+    <p>Coins: {{ coins }}</p>
+    <p><a href="/">⬅ Back to events</a></p>
+    <table border="1">
+        <tr>
+            <th>Event</th>
+            <th>Vote</th>
+            <th>Outcome</th>
+            <th>Result</th>
+        </tr>
+        {% for p in predictions %}
+        <tr>
+            <td>{{ p.event_id }}</td>
+            <td>{{ p.vote }}</td>
+            <td>{{ p.outcome if p.outcome else '-' }}</td>
+            <td>
+                {% if p.won == True %} Win
+                {% elif p.won == False %} Lose
+                {% else %}-{% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

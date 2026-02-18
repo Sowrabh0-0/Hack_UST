@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaderboard</title>
+</head>
+
+<body>
+    <h1>Leaderboard</h1>
+    <p><a href="/">⬅ Back to events</a></p>
+    <table border="1">
+        <tr>
+            <th>User</th>
+            <th>Coins</th>
+        </tr>
+        {% for user, coins in leaderboard %}
+        <tr>
+            <td><a href="/history/{{ user }}">{{ user }}</a></td>
+            <td>{{ coins }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

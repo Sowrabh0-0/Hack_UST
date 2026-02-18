@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Game</title>
+</head>
+<body>
+<h1>Prediction Game</h1>
+<p><a href="/leaderboard">Leaderboard</a></p>
+
+<ul>
+{% for event in events %}
+    <li>
+        <strong>{{ event.description }}</strong> ({{ event.target_date }})
+        {% if event.status == 'pending' %}
+            <form action="/vote/{{ event.id }}" method="post">
+                <input type="text" name="username" placeholder="Your name" required>
+                <button name="vote" value="yes">Yes</button>
+                <button name="vote" value="no">No</button>
+            </form>
+        {% else %}
+            Outcome: <strong>{{ event.outcome }}</strong>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+</body>
+</html>

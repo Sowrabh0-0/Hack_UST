@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "description": "Will Trump say 'economy' in his next speech?",
+    "target_date": "2026-02-20",
+    "status": "pending",
+    "outcome": null
+  },
+  {
+    "id": 2,
+    "description": "Will the next Oscars best picture be a comedy?",
+    "target_date": "2026-03-01",
+    "status": "pending",
+    "outcome": null
+  }
+]
