@@ -13,12 +13,9 @@ WHITELIST_PORTS = [80, 443, 22, 53]   # HTTP, HTTPS, SSH, DNS
 connections = psutil.net_connections(kind='inet')
 
 for conn in connections:
-    
     if conn.status == psutil.CONN_LISTEN:
-        
         local_port = conn.laddr.port
         pid = conn.pid
-        
         try:
             process = psutil.Process(pid)
             process_name = process.name()
