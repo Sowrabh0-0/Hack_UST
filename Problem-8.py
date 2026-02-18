@@ -5,24 +5,20 @@
 
 # Key Libraries: flask or http.server.
 
-
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from flask import Flask
 import subprocess
 
-class MyHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        if self.path == "/run-maintenance":
-            self.send_response(200)
-            self.end_headers()
-            self.wfile.write(b"Running Maintenance Script...")
+app = Flask(__name__)
 
-            # run the script here
-            subprocess.run(["python", "maintenance_script.py"])
-        else:
-            self.send_response(404)
-            self.end_headers()
-            self.wfile.write(b"Wrong route")
+@app.route("/run-maintenance")
+def run_maintenance():
+    subprocess.run(["python", "maintenance_script.py"])
+    return "Running Maintenance script..."
 
-server = HTTPServer(("", 8080), MyHandler)
-print("Server running at http://localhost:8080")
-server.serve_forever()
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def catch_all(path):
+    return "Wrong route", 404
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
