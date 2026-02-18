@@ -1,3 +1,11 @@
+# A tool that maps every open network port on the machine to its specific Process ID (PID)
+# and the user running it. It generates a summary of "Suspicious Ports" 
+# (e.g., anything open that isn't on a pre-approved whitelist).
+
+
+# Key Libraries: psutil, socket.
+
+
 import psutil
 
 
