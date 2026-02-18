@@ -10,10 +10,6 @@ import psutil
 
 
 WHITELIST_PORTS = [80, 443, 22, 53]   # HTTP, HTTPS, SSH, DNS
-
-
-print("=== Local Port & Process Traffic Cop ===\n")
-
 connections = psutil.net_connections(kind='inet')
 
 for conn in connections:
@@ -41,4 +37,4 @@ for conn in connections:
         print(f"PID: {pid}")
         print(f"User: {username}")
         print(f"Status: {status}")
-        print("-" * 40)
+        print()
