@@ -6,24 +6,23 @@
 # Key Libraries: flask or http.server.
 
 
-import http.server
-from logging import Handler
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import subprocess
 
-class MaintenanceHandler(http.server.BaseHTTPRequestHandler):
+class MyHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/run-maintenance":
             self.send_response(200)
             self.end_headers()
-            self.wfile.write(b"Running maintenance script...")
-            # Here you would add the code to execute your maintenance script
-            # For example: subprocess.run(["python", "maintenance_script.py"])
+            self.wfile.write(b"Running Maintenance Script...")
+
+            # run the script here
+            subprocess.run(["python", "maintenance_script.py"])
         else:
             self.send_response(404)
             self.end_headers()
-            self.wfile.write(b"Not Found")
+            self.wfile.write(b"Wrong route")
 
-if __name__ == "__main__":
-    server_address = ('', 8080) 
-    httpd = http.server.HTTPServer(server_address, MaintenanceHandler)
-    print("Server is running on port 8080...")
-    httpd.serve_forever()
+server = HTTPServer(("", 8080), MyHandler)
+print("Server running at http://localhost:8080")
+server.serve_forever()
